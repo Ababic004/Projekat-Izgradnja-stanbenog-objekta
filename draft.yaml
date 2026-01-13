@@ -1,55 +1,12 @@
 models:
-  Project:
-    name: string
-    location: string nullable
-    status: enum:planning,in_progress,finished default:planning
-    start_date: date nullable
-    end_date: date nullable
-    budget_eur: integer nullable
-    progress_percent: integer default:0
-    relationships:
-      hasMany: Unit, Document, ProcurementRequest
-
-  Unit:
-    project_id: id foreign
-    code: string
-    address: string nullable
-    floor: integer
-    area_m2: integer
-    rooms: integer
-    price_eur: integer
-    status: enum:available,reserved,sold default:available
-    relationships:
-      belongsTo: Project
-
-  Document:
-    project_id: id foreign
+  Procurement:
     title: string
-    doc_type: enum:technical_drawing,legal,specification,plan,other default:other
-    version: string default:v1.0
-    document_date: date nullable
-    uploaded_by: string nullable
-    status: enum:draft,approved,archived default:draft
-    relationships:
-      belongsTo: Project
-
-  ProcurementRequest:
-    project_id: id foreign
-    material_name: string
-    quantity: integer
-    delivery_date: date nullable
-    priority: enum:low,medium,high default:medium
-    note: text nullable
-    status: enum:draft,sent,approved,rejected default:draft
-    relationships:
-      belongsTo: Project
+    supplier: string
+    description: text nullable
+    total_amount: decimal:10,2
+    status: string
+    timestamps: true
 
 controllers:
-  Project:
-    resource: web
-  Unit:
-    resource: web
-  Document:
-    resource: web
-  ProcurementRequest:
+  ProcurementRequestController:
     resource: web

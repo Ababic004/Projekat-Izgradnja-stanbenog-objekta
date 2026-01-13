@@ -14,9 +14,7 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', fn () => view('app.dashboard'))->name('dashboard');
 
-    // =========================
-    // NON-ADMIN USE CASES
-    // =========================
+   
     Route::get('/nekretnine', [UnitController::class, 'publicIndex'])
         ->name('units.public');
 
@@ -29,9 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/nabavke', [ProcurementRequestController::class, 'storePublic'])
         ->name('procurements.public.store');
 
-    // =========================
-    // ADMIN CRUD
-    // =========================
+    
     Route::prefix('admin')
         ->name('admin.')
         ->middleware('admin')
@@ -44,4 +40,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+
+
+
 
