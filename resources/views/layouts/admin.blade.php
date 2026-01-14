@@ -3,25 +3,54 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'GradiFirma')</title>
+    <title>@yield('title', 'Babi')</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
+    
+
 </head>
 <body class="bg-gray-50 text-gray-900">
 <div class="min-h-screen flex">
     <aside class="w-64 bg-white border-r">
         <div class="p-4 font-semibold">
-            <div class="text-lg">GradiFirma</div>
+            <div class="text-lg">Babi</div>
             <div class="text-xs text-gray-500">Upravljački sistem</div>
         </div>
 
         <nav class="px-2 pb-4 text-sm">
-            <a class="block px-3 py-2 rounded hover:bg-gray-100" href="{{ route('dashboard') }}">Dashboard</a>
+          
+        @php
+            $isDashboard = request()->routeIs('dashboard');
+            $isProjects = request()->routeIs('admin.projects.*');
+            $isDocuments = request()->routeIs('admin.documents.*');
+            $isProcurements = request()->routeIs('admin.procurements.*');
 
-            <div class="mt-2 text-xs text-gray-400 px-3">ADMIN</div>
-            <a class="block px-3 py-2 rounded border rounded hover:bg-gray-100" href="{{ route('admin.projects.index') }}">Projekti</a>
+            $navItem = function (bool $active) {
+                return 'block px-3 py-2 rounded border hover:bg-gray-100 ' .
+                    ($active ? 'bg-gray-100 font-semibold border-gray-300' : 'bg-white text-black border-gray-300');
+            };
+        @endphp
 
-            <a href="{{ route('admin.documents.index') }}"
-            class="block px-3 py-2 rounded border border-gray-300 bg-white text-black hover:bg-gray-100">Dokumenta </a>
+        <a href="{{ route('dashboard') }}"
+        class="{{ $navItem($isDashboard) }}">
+        Dashboard
+        </a>
+
+
+        <a href="{{ route('admin.projects.index') }}"
+        class="{{ $navItem($isProjects) }}">
+        Projekti
+        </a>
+
+        <a href="{{ route('admin.documents.index') }}"
+        class="{{ $navItem($isDocuments) }}">
+        Dokumenta
+        </a>
+
+        <a href="{{ route('admin.procurements.index') }}"
+        class="{{ $navItem($isProcurements) }}">
+        Nabavke
+        </a>
+
         </nav>
     </aside>
 
@@ -37,15 +66,15 @@
             </div>
         </header>
 
-        <div class="p-6">
-            @if (session('success'))
-                <div class="mb-4 rounded-md bg-green-50 border border-green-200 p-3 text-sm text-green-800">
-                    {{ session('success') }}
-                </div>
-            @endif
+                    <div class="p-6">
+                @if (session('success'))
+                    <div class="mb-4 rounded-md bg-green-50 border border-green-200 p-3 text-sm text-green-800">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-            @yield('content')
-        </div>
+                @yield('content')
+            </div>
     </main>
 </div>
 </body>

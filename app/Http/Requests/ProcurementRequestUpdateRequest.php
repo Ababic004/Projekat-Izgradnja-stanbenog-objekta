@@ -20,7 +20,11 @@ class ProcurementRequestUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'procurementRequest' => ['required'],
+            'title' => ['required', 'string', 'max:255'],
+            'supplier' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'total_amount' => ['required', 'numeric', 'min:0'],
+            'status' => ['nullable', 'in:draft,submitted,approved,rejected'],
         ];
     }
 }

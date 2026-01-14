@@ -22,6 +22,10 @@ class Procurement extends Model
         'status',
     ];
 
+    protected $attributes = [
+    'status' => 'draft',
+    ];
+
     /**
      * Get the attributes that should be cast.
      *

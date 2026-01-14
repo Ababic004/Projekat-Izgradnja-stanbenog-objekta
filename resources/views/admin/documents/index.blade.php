@@ -5,7 +5,7 @@
     <h1 class="text-xl font-semibold text-black">Dokumenta</h1>
 
     <a href="{{ route('admin.documents.create') }}"
-       class="px-4 py-2 bg-gray-200 text-black border border-gray-400 rounded">
+       class="px-4 py-2 bg-white text-black">
         + Novi dokument
     </a>
 </div>

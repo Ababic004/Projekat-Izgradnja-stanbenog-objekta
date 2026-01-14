@@ -12,7 +12,8 @@ class ProcurementRequestController extends Controller
 {
     public function index()
     {
-        $procurements = Procurement::all();
+        $procurements = Procurement::paginate(10);
+
 
         return view('admin.procurements.index', [
             'procurements' => $procurements,
@@ -26,12 +27,17 @@ class ProcurementRequestController extends Controller
 
     public function store(ProcurementRequestStoreRequest $request)
     {
-        Procurement::create($request->validated());
+        $data = $request->validated();
 
-        return redirect()->route('admin.procurements.index');
+        $data['status'] = $data['status'] ?? 'draft';
+
+        Procurement::create($data);
+
+        return redirect()
+            ->route('admin.procurements.index')
+            ->with('success', 'Nabavka je uspešno sačuvana.');
     }
-
-    public function show(Procurement $procurement)
+     public function show(Procurement $procurement)
     {
         return view('admin.procurements.show', [
             'procurement' => $procurement,
@@ -49,13 +55,19 @@ class ProcurementRequestController extends Controller
     {
         $procurement->update($request->validated());
 
-        return redirect()->route('admin.procurements.index');
+        return redirect()
+            ->route('admin.procurements.index')
+            ->with('success', 'Nabavka je uspešno izmenjena.');
     }
+
 
     public function destroy(Procurement $procurement)
     {
         $procurement->delete();
 
-        return redirect()->route('admin.procurements.index');
+        return redirect()
+            ->route('admin.procurements.index')
+            ->with('success', 'Nabavka je obrisana.');
     }
+
 }
