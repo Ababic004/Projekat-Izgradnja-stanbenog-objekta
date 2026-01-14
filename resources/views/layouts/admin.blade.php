@@ -23,6 +23,7 @@
             $isProjects = request()->routeIs('admin.projects.*');
             $isDocuments = request()->routeIs('admin.documents.*');
             $isProcurements = request()->routeIs('admin.procurements.*');
+            $isMyProcurements = request()->routeIs('procurements.*');
 
             $navItem = function (bool $active) {
                 return 'block px-3 py-2 rounded border hover:bg-gray-100 ' .
@@ -35,21 +36,33 @@
         Dashboard
         </a>
 
+        @if(auth()->user()->is_admin)
+             {{-- ADMIN --}}
+            <a href="{{ route('admin.projects.index') }}"
+            class="{{ $navItem($isProjects) }}">
+            Projekti
+            </a>
 
-        <a href="{{ route('admin.projects.index') }}"
-        class="{{ $navItem($isProjects) }}">
-        Projekti
-        </a>
+            <a href="{{ route('admin.documents.index') }}"
+            class="{{ $navItem($isDocuments) }}">
+            Dokumenta
+            </a>
 
-        <a href="{{ route('admin.documents.index') }}"
-        class="{{ $navItem($isDocuments) }}">
-        Dokumenta
-        </a>
+            <a href="{{ route('admin.procurements.index') }}"
+            class="{{ $navItem($isProcurements) }}">
+            Nabavke
+            </a>
 
-        <a href="{{ route('admin.procurements.index') }}"
-        class="{{ $navItem($isProcurements) }}">
-        Nabavke
-        </a>
+        @endif
+        
+        @if(!auth()->user()->is_admin)
+            <div class="mt-2 text-xs text-gray-400 px-3">KORISNIK</div>
+
+            <a href="{{ route('procurements.create') }}"
+            class="{{ request()->routeIs('procurements.*') ? 'bg-indigo-600 text-white' : 'text-gray-300 hover:bg-gray-700' }} block px-4 py-2 rounded">
+                Pošalji zahtev za nabavku
+            </a>
+        @endif
 
         </nav>
     </aside>

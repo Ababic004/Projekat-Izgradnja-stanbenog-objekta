@@ -9,22 +9,22 @@
 <div class="grid md:grid-cols-4 gap-4">
     <div class="bg-white border rounded-lg p-4">
         <div class="text-sm text-gray-500">Projekti</div>
-        <div class="text-2xl font-semibold">0</div>
+        <div class="text-2xl font-semibold">2</div>
     </div>
 
     <div class="bg-white border rounded-lg p-4">
         <div class="text-sm text-gray-500">Nekretnine</div>
-        <div class="text-2xl font-semibold">0</div>
+        <div class="text-2xl font-semibold">2</div>
     </div>
 
     <div class="bg-white border rounded-lg p-4">
         <div class="text-sm text-gray-500">Dokumenti</div>
-        <div class="text-2xl font-semibold">0</div>
+        <div class="text-2xl font-semibold">2</div>
     </div>
 
     <div class="bg-white border rounded-lg p-4">
         <div class="text-sm text-gray-500">Nabavke</div>
-        <div class="text-2xl font-semibold">0</div>
+        <div class="text-2xl font-semibold">3</div>
     </div>
 </div>
 <div class="mt-6 flex flex-wrap gap-3">

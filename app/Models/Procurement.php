@@ -9,6 +9,13 @@ class Procurement extends Model
 {
     use HasFactory;
 
+
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +28,7 @@ class Procurement extends Model
         'total_amount',
         'status',
     ];
+
 
     protected $attributes = [
     'status' => 'draft',

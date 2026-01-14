@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('location')->nullable();
-            $table->enum('status', ['planning','in_progress','done'])->default('planning');
+            $table->enum('status', ['planirano','aktivno','zavrseno']);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->unsignedBigInteger('budget_eur')->default(0);
